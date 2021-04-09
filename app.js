@@ -169,6 +169,7 @@ app.post("/registertemp",upload.single('profileimg'),(req,res)=>{
             newimg.save();
             var password=newuser.password;
             delete newuser["password"];
+            newuser.profileimg=link
             // console.log(newuser);
             User.register(newuser,password,function(err,user)
             {
@@ -296,6 +297,7 @@ app.get("/search",isLoggedin,function(req,res)
                     results.push(users[i]);
                 }
             }
+            console.log(results)
             Image.findOne({username: req.user.username},function(err,image)
             {
                 res.render("searchresultsnew",{results: results,loggedUser: req.user.username,q: query,uimg: image.profileimg});
@@ -351,6 +353,7 @@ app.get("/search",isLoggedin,function(req,res)
         // console.log(results);
         Image.findOne({username: req.user.username},function(err,image)
         {
+           
             res.render("searchresultsnew",{results: results,loggedUser: req.user.username,q: query, uimg: image.profileimg});
         })
         
@@ -645,6 +648,22 @@ app.get("/remove/:userid",function(req,res)
         User.findOneAndUpdate({username: req.params.userid},{$set:{following: newR}},function(err,user){});
         res.redirect("back");
     })
+})
+app.post("/newposttemp",upload.single('image'),function(req,res){
+    const newblog=JSON.parse(JSON.stringify(req.body))
+    console.log("new Blog: ",newblog);
+    newblog["createdby"]=req.user.username;
+    var options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    var today  = new Date();
+    newblog["timeString"]=today.toLocaleTimeString("en-US",options);
+    newblog["timeStamp"]=today.getTime();
+
+    const link=(typeof req.file==="undefined") ? "https://i0.pickpik.com/photos/769/703/611/apple-computer-iphone-keyboard-preview.jpg" : req.file.path;
+    newblog["image"]=link;
+    console.log("img: ",link);
+    const newB=new Blog(newblog);
+    newB.save();
+    res.redirect("/profile");
 })
 app.post("/newpost",function(req,res)
 {
