@@ -49,7 +49,7 @@ const multer=require('multer')
 const upload=multer({storage})
 
 //mongodb+srv://archit:archit@cluster0.yd8qg.mongodb.net/?retryWrites=true&w=majority
-const connectionURLnew="mongodb+srv://archit:archit@cluster0.yd8qg.mongodb.net/instalikeDatabasev2?retryWrites=true&w=majority";
+// const connectionURLnew="mongodb+srv://archit:archit@cluster0.yd8qg.mongodb.net/instalikeDatabasev2?retryWrites=true&w=majority";
 const prevURL="mongodb://127.0.0.1:27017/instalikeDB22";
 //college-id and mpass  (for mongo atlas)
 mongoose.connect(connectionURLnew,{useNewUrlParser: true,useUnifiedTopology: true});
