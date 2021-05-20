@@ -49,8 +49,8 @@ const upload=multer({storage})
 
 //mongodb+srv://archit:archit@cluster0.yd8qg.mongodb.net/?retryWrites=true&w=majority
 const connectionURLnew="mongodb+srv://archit:archit@cluster0.yd8qg.mongodb.net/instalikeDatabase?retryWrites=true&w=majority";
-const prevURL="mongodb://127.0.0.1:27017/instalikeDB2";
-
+const prevURL="mongodb://127.0.0.1:27017/instalikeDB22";
+//college-id and mpass  (for mongo atlas)
 mongoose.connect(prevURL,{useNewUrlParser: true,useUnifiedTopology: true});
 const userSchema=new mongoose.Schema({
     name: String,
